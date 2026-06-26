@@ -1,0 +1,25 @@
+# Compilateur et options
+CC = gcc
+CFLAGS = -Wall -Wextra -g
+
+# Nom de l'exécutable final
+EXEC = gestion_scolarite_LMI2
+
+# Fichiers sources et objets
+SRC = main.c etudiant.c tableau_statique.c tableau_dynamique.c liste_chainee.c persistance.c
+OBJ = $(SRC:.c=.o)
+
+# Règle principale
+all: $(EXEC)
+
+# Création de l'exécutable
+$(EXEC): $(OBJ)
+	$(CC) -o $@ $^ -lm
+
+# Compilation des modules
+%.o: %.c
+	$(CC) $(CFLAGS) -c $<
+
+# Nettoyage des fichiers compilés
+clean:
+	rm -f *.o $(EXEC) *.bin
